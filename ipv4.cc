@@ -342,6 +342,46 @@ std::string IPV4::operator++()
     return incrementedIP;
 }
 
+// Decrement the IP Address by 1
+std::string IPV4::operator--()
+{
+    // First get the Network Range
+    // std::vector<std::string> networkRange = generateNetworkRange();
 
+    // Get the first and last IP Address in the Network Range
+    std::string firstIP = networkRange[0];
+    std::string lastIP = networkRange[1];
 
+    // Increment the first IP Address in the Network Range by 1
+    std::vector <std::string> firstIPOctets;
+    std::stringstream ss(firstIP);
+    std::string octet;
+    while(std::getline(ss, octet, '.'))
+    {
+        firstIPOctets.push_back(octet);
+    }
 
+    int firstIPOctet = std::stoi(firstIPOctets[3]);
+    int lastIPOctet = firstIPOctet - 1;
+
+    // check if the generated range is not greater than the last IP Address in the Network Range
+    std::vector <std::string> lastIPOctets;
+    std::stringstream ss2(lastIP);
+    std::string octet2;
+    while(std::getline(ss2, octet2, '.'))
+    {
+        lastIPOctets.push_back(octet2);
+    }
+
+    int lastIPOctet2 = std::stoi(lastIPOctets[3]);
+    if(lastIPOctet < lastIPOctet2)
+    {
+        std::cout << "The range is too large for the given IP Address" << std::endl;
+        exit(0);
+    }
+
+    // Generate the IP Addresses in the range
+    std::string decrementedIP = firstIPOctets[0] + "." + firstIPOctets[1] + "." + firstIPOctets[2] + "." + std::to_string(lastIPOctet);
+
+    return decrementedIP;
+}
