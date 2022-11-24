@@ -32,15 +32,17 @@ public:
     //Define Static Functions
     static bool validateIPV4(std::string ip);
      std::string convertCIDRToSubnet(std::string ip);
-    //  std::vector<std::string> generateNetworkRange();
+   
 
 
 
     //Define Member Functions
-    std::vector <std::string> generateRange(std::string ip, int range);
+    static std::vector <std::string> generateRange(std::string ip, int range);
 
     //Add the IP Address by 1 using operator overriding
     std::string operator++();
+
+    // Subtract the IP Address by 1 using operator overriding
     std::string operator--();
 
 };

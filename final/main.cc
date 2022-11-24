@@ -24,6 +24,11 @@ int main()
     int range;
     std::cin >> range;
     std::vector<std::string> ipRange = ip1.generateRange(ip, range);
+    std::cout << "IP Addresses in the range: " << std::endl;
+    for(int i = 0; i < ipRange.size(); i++)
+    {
+        std::cout << ipRange[i] << std::endl;
+    }
 
     return 0;
 }

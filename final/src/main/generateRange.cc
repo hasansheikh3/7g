@@ -10,7 +10,7 @@
 
 using namespace std;
 
-std::vector <std::string> generateRange(std::string ip, int range)
+std::vector <std::string> IPV4::generateRange(std::string ip, int range)
 {
     // Step 1 - SPlit the IP Address and CIDR notation using the splitCIDR function
     vector<string> ipAndCIDR = splitCIDR(ip);
@@ -150,8 +150,7 @@ std::vector <std::string> generateRange(std::string ip, int range)
     }
 
     // Print the possible number of IP Addresses based on the CIDR Notation
-    cout << "Number of IP Addresses: " << networkRange(ip) << endl;
-
+    cout << "Number of IP Addresses: " << numberOfIPAddresses << endl;
     // Check if the range entered is valid
     if (range > numberOfIPAddresses)
     {
@@ -169,6 +168,5 @@ std::vector <std::string> generateRange(std::string ip, int range)
     return ipAddressesInRange;
 
     
-    // return ipAddresses;
 
 }
