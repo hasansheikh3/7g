@@ -1,7 +1,7 @@
 // Include catch.hpp from github.com/philsquared/Catch
 
 #define CATCH_CONFIG_MAIN
-#include "../catch.hpp"
+#include "../includes/catch.hpp"
 #include "../includes/ipv4.h"
 #include "../src/helpers/SplitIP.cc"
 #include "../src/helpers/SplitCIDR.cc"

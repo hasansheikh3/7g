@@ -7,11 +7,18 @@
 #include "../helpers/SplitCIDR.h"
 #include "../helpers/networkRange.h"
 #include "../../includes/ipv4.h"
+#include "../helpers/checkcidr.h"
+
 
 using namespace std;
 
 std::vector <std::string> IPV4::generateRange(std::string ip, int range)
 {
+
+    // Check if CIDR is present
+    if(checkCIDRORSubnet(ip))
+    {
+
     // Step 1 - SPlit the IP Address and CIDR notation using the splitCIDR function
     vector<string> ipAndCIDR = splitCIDR(ip);
    
@@ -150,7 +157,7 @@ std::vector <std::string> IPV4::generateRange(std::string ip, int range)
     }
 
     // Print the possible number of IP Addresses based on the CIDR Notation
-    cout << "Number of IP Addresses: " << numberOfIPAddresses << endl;
+    cout << "Number of IP Addresses Possible: " << numberOfIPAddresses << endl;
     // Check if the range entered is valid
     if (range > numberOfIPAddresses)
     {
@@ -166,6 +173,14 @@ std::vector <std::string> IPV4::generateRange(std::string ip, int range)
     }
 
     return ipAddressesInRange;
+    }
+    else
+    {
+        cout << "Unable to detect CIDR" << endl;
+        exit(0);
+    }
+
+    
 
     
 

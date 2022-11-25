@@ -9,60 +9,58 @@
 
 bool IPV4::validateIPV4(std::string ip)
 {
-    // Split IP Address into IP and CIDR
-    std::vector<std::string> ipCIDR = splitCIDR(ip);
+     // SPlit the given IP Address into ip and CIDR using substring
+    std::string ipAddr = ip.substr(0, ip.find("/"));
+    std::string cidr = ip.substr(ip.find("/") + 1, ip.length());
 
-    // Save the IP Address and CIDR into their own variables
-    std::string ipAddress = ipCIDR[0];
-    int cidr = std::stoi(ipCIDR[1]);
+    // Check#1 : SPlit IP Address into 4 octets
+    std::vector <std::string> octets;
+    std::stringstream ss(ipAddr);
+    std::string octet;
+    while(std::getline(ss, octet, '.'))
+    {
+        octets.push_back(octet);
+    }
 
-    // Split IP Address into 4 octets
-    std::vector<std::string> octets = splitIP(ipAddress);
 
-    // Check if there are 4 octets
-    if (octets.size() != 4)
+   
+
+    // Check#2 : Check if IP Address has 4 octets
+    if(octets.size() != 4)
     {
         return false;
     }
+    
 
-    // Check if each octet is between 0 and 255
-    for (int i = 0; i < 4; i++)
+    // Check#3 : Check if each octet is a number
+    for(int i = 0; i < octets.size(); i++)
     {
-        int octet = std::stoi(octets[i]);
-        if (octet < 0 || octet > 255)
+        for(int j = 0; j < octets[i].length(); j++)
+        {
+            if(!isdigit(octets[i][j]))
+            {
+                return false;
+            }
+        }
+    }
+
+    // Check#4 : Check if each octet is between 0 and 255
+    for(int i = 0; i < octets.size(); i++)
+    {
+        if(std::stoi(octets[i]) < 0 || std::stoi(octets[i]) > 255)
         {
             return false;
         }
     }
 
-    // Check if each octet is a number
-    for (int i = 0; i < 4; i++)
+    // Check if CIDR is valid
+    if(ip.find("/") != std::string::npos)
     {
-        if (!std::all_of(octets[i].begin(), octets[i].end(), ::isdigit))
+        std::string cidr = ip.substr(ip.find("/") + 1);
+        if(std::stoi(cidr) < 0 || std::stoi(cidr) > 32)
         {
             return false;
         }
-    }
-
-    // Check if first character of each octet is not 0
-    for (int i = 0; i < 4; i++)
-    {
-        if (octets[i][0] == '0')
-        {
-            return false;
-        }
-    }
-
-    // Check if CIDR is between 0 and 32
-    if (cidr < 0 || cidr > 32)
-    {
-        return false;
-    }
-
-    // Check if CIDR is a number
-    if (!std::all_of(ipCIDR[1].begin(), ipCIDR[1].end(), ::isdigit))
-    {
-        return false;
     }
 
     return true;

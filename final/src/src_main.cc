@@ -48,7 +48,7 @@ void IPV4::setSubnetMask(std::string subnetMask)
     if(validateIPV4(subnetMask))
     {
         this->subnetMask = subnetMask;
-        std::cout << "Subnet Mask set successfully" << std::endl;
+        
     }
     else
     {
