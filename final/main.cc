@@ -19,7 +19,8 @@ int main()
     IPV4 ipv4;
 
     ipv4.setIPV4(ip);
-    
+
+  
     if (checkCIDRORSubnet(ip) == true)
     {
         std::cout << "IP Address: " << ipv4.getIPV4() << std::endl;

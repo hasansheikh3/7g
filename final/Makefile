@@ -14,7 +14,7 @@ main:$(MAIN) $(SRCS)
 	@echo "To execute: ./build/main"
 	@echo "✔️ Done Building"
 	@mkdir -p $(BUILD) 
-	$(CC) $(CFLAGS) -o $(BUILD)/$@ $^
+	@$(CC) $(CFLAGS) -o $(BUILD)/$@ $^
 
 tests: $(TESTS)
 	@echo "💥 Building........"

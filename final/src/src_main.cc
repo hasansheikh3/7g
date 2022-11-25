@@ -34,7 +34,7 @@ void IPV4::setIPV4(std::string ip)
     if(validateIPV4(ip))
     {
         this->ip = ip;
-        std::cout << "IP Address set successfully" << std::endl;
+        std::cout << "IP Address is Valid and Set successfully." << std::endl;
     }
     else
     {
